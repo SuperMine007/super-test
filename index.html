@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome, Super!</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+            letter-spacing: 2px;
+        }
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: #bdc3c7;
+        }
+        .buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.5);
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            transform: translateY(-5px) scale(1.05);
+            background-color: #ff7675;
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.7);
+        }
+        button:active {
+            transform: translateY(1px);
+        }
+        .secondary {
+            background-color: #3498db;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.5);
+        }
+        .secondary:hover {
+            background-color: #74b9ff;
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.7);
+        }
+        .container {
+            padding: 60px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, Super!</h1>
+        <div class="subtitle">The dynamic web server is successfully up and running.</div>
+        <div class="buttons">
+            <button onclick="alert('Accessing Dashboard Area...')">Dashboard</button>
+            <button class="secondary" onclick="alert('Checking Playit Tunnel Connection Status...')">Status</button>
+        </div>
+    </div>
+</body>
+</html>

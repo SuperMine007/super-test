@@ -1,0 +1,50 @@
+name: Run Web Server with Playit
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  run-container:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image with Caching
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true
+          tags: super-web-server:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Create persistent data directory
+        run: mkdir -p data
+
+      - name: Download Backup
+        run: |
+          # TODO: run rclone download here
+          echo "Placeholder for rclone download before container starts"
+
+      - name: Run Web Server and Playit
+        env:
+          PLAYIT_SECRET: ${{ secrets.PLAYIT_SECRET }}
+        run: |
+          # Limit execution to safely allow the post-steps (rclone upload) to run before GitHub's 6-hour hard limit.
+          timeout 330m docker run --rm \
+            -v ${{ github.workspace }}/data:/data \
+            -e PLAYIT_SECRET="$PLAYIT_SECRET" \
+            super-web-server:latest || echo "Server run completed or gracefully timed out."
+
+      - name: Upload Backup
+        if: always()
+        run: |
+          # TODO: run rclone upload here
+          echo "Placeholder for rclone upload after container finishes"
