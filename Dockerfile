@@ -28,6 +28,13 @@ VOLUME /data
 # Create a startup script that runs both the Python HTTP Server and the Playit agent
 RUN echo '#!/bin/bash\n\
 python3 -m http.server 80 &\n\
+\n\
+if [ -z "$PLAYIT_SECRET" ]; then\n\
+  echo "ERROR: PLAYIT_SECRET is empty. Playit will ask for interactive setup and freeze! Stopping."\n\
+  exit 1\n\
+fi\n\
+\n\
+echo "Starting playit in headless mode with secret..."\n\
 playit --secret "$PLAYIT_SECRET"\n\
 ' > /start.sh && chmod +x /start.sh
 

@@ -38,7 +38,7 @@ jobs:
           PLAYIT_SECRET: ${{ secrets.PLAYIT_SECRET }}
         run: |
           # Limit execution to safely allow the post-steps (rclone upload) to run before GitHub's 6-hour hard limit.
-          timeout 330m docker run --rm \
+          timeout 330m docker run -t --rm \
             -v ${{ github.workspace }}/data:/data \
             -e PLAYIT_SECRET="$PLAYIT_SECRET" \
             super-web-server:latest || echo "Server run completed or gracefully timed out."
